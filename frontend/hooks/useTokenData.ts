@@ -1,4 +1,3 @@
-```typescript
 import { useState, useEffect, useRef } from 'react';
 
 export interface Token {
@@ -14,7 +13,7 @@ export interface Token {
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/tokens';
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3001';
 
-export function useTokenData() {
+export default function useTokenData() {
     const [tokens, setTokens] = useState<Token[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -69,4 +68,3 @@ export function useTokenData() {
 
     return { tokens, isLoading, error };
 }
-```

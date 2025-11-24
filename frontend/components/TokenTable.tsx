@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useTokenData, Token } from '../hooks/useTokenData';
+import useTokenData, { Token } from '../hooks/useTokenData';
 import {
     Table,
     TableBody,
