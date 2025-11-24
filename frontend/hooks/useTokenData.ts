@@ -1,3 +1,4 @@
+```typescript
 import { useState, useEffect, useRef } from 'react';
 
 export interface Token {
@@ -10,6 +11,9 @@ export interface Token {
     marketCap: number;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/tokens';
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3001';
+
 export function useTokenData() {
     const [tokens, setTokens] = useState<Token[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +24,7 @@ export function useTokenData() {
         // Fetch initial data
         const fetchInitialData = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/tokens');
+                const response = await fetch(API_URL);
                 if (!response.ok) throw new Error('Failed to fetch initial data');
                 const data = await response.json();
                 setTokens(data);
@@ -34,7 +38,7 @@ export function useTokenData() {
         fetchInitialData();
 
         // Setup WebSocket
-        const ws = new WebSocket('ws://localhost:3001');
+        const ws = new WebSocket(WS_URL);
         wsRef.current = ws;
 
         ws.onopen = () => {
@@ -65,3 +69,4 @@ export function useTokenData() {
 
     return { tokens, isLoading, error };
 }
+```
